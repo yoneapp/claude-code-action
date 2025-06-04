@@ -1,0 +1,38 @@
+name: Sync Tags from Upstream
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/grll/claude-code-action.git
+          git remote -v
+
+      - name: Fetch upstream tags
+        run: |
+          git fetch upstream --tags
+          echo "取得したタグ一覧:"
+          git tag -l
+
+      - name: Push tags to origin
+        run: |
+          git push origin --tags
+          echo "タグの同期が完了しました"
+
+      - name: Create summary
+        run: |
+          echo "## タグ同期結果" >> $GITHUB_STEP_SUMMARY
+          echo "実行日時: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "同期されたタグ数: $(git tag -l | wc -l)" >> $GITHUB_STEP_SUMMARY
