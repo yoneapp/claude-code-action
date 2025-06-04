@@ -93,7 +93,7 @@ jobs:
           fetch-depth: 1
 
       - name: Run Claude PR Action
-        uses: grll/claude-code-action@beta
+        uses: yoneapp/claude-code-action@beta
         with:
           use_oauth: true
           claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
@@ -282,7 +282,7 @@ on:
       - "src/api/**/*.ts"
 
 steps:
-  - uses: grll/claude-code-action@beta  # Fork with OAuth support
+  - uses: yoneapp/claude-code-action@beta  # Fork with OAuth support
     with:
       direct_prompt: |
         Update the API documentation in README.md to reflect
@@ -306,7 +306,7 @@ jobs:
       github.event.pull_request.user.login == 'developer1' ||
       github.event.pull_request.user.login == 'external-contributor'
     steps:
-      - uses: grll/claude-code-action@beta  # Fork with OAuth support
+      - uses: yoneapp/claude-code-action@beta  # Fork with OAuth support
         with:
           direct_prompt: |
             Please provide a thorough review of this pull request.
@@ -381,7 +381,7 @@ Claude does **not** have access to execute arbitrary Bash commands by default. I
 **Note**: If your repository has a `.mcp.json` file in the root directory, Claude will automatically detect and use the MCP server tools defined there. However, these tools still need to be explicitly allowed via the `allowed_tools` configuration.
 
 ```yaml
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: yoneapp/claude-code-action@beta  # Fork with OAuth support
   with:
     allowed_tools: "Bash(npm install),Bash(npm run test),Edit,Replace,NotebookEditCell"
     disallowed_tools: "TaskOutput,KillTask"
@@ -395,7 +395,7 @@ Claude does **not** have access to execute arbitrary Bash commands by default. I
 Use a specific Claude model:
 
 ```yaml
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: yoneapp/claude-code-action@beta  # Fork with OAuth support
   with:
     # model: "claude-3-5-sonnet-20241022"  # Optional: specify a different model
     # ... other inputs
@@ -424,13 +424,13 @@ Use provider-specific model names based on your chosen provider:
 
 ```yaml
 # For direct Anthropic API (default)
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: yoneapp/claude-code-action@beta  # Fork with OAuth support
   with:
     anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
     # ... other inputs
 
 # For OAuth authentication (Claude Max subscribers)
-- uses: grll/claude-code-action@beta
+- uses: yoneapp/claude-code-action@beta
   with:
     use_oauth: "true"
     claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
@@ -439,14 +439,14 @@ Use provider-specific model names based on your chosen provider:
     # ... other inputs
 
 # For Amazon Bedrock with OIDC
-- uses: grll/claude-code-action@beta
+- uses: yoneapp/claude-code-action@beta
   with:
     model: "anthropic.claude-3-7-sonnet-20250219-beta:0" # Cross-region inference
     use_bedrock: "true"
     # ... other inputs
 
 # For Google Vertex AI with OIDC
-- uses: grll/claude-code-action@beta
+- uses: yoneapp/claude-code-action@beta
   with:
     model: "claude-3-7-sonnet@20250219"
     use_vertex: "true"
@@ -472,7 +472,7 @@ Both AWS Bedrock and GCP Vertex AI require OIDC authentication.
     app-id: ${{ secrets.APP_ID }}
     private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: yoneapp/claude-code-action@beta  # Fork with OAuth support
   with:
     model: "anthropic.claude-3-7-sonnet-20250219-beta:0"
     use_bedrock: "true"
@@ -497,7 +497,7 @@ Both AWS Bedrock and GCP Vertex AI require OIDC authentication.
     app-id: ${{ secrets.APP_ID }}
     private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: yoneapp/claude-code-action@beta  # Fork with OAuth support
   with:
     model: "claude-3-7-sonnet@20250219"
     use_vertex: "true"
