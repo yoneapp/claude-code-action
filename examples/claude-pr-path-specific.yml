@@ -16,7 +16,7 @@ jobs:
       contents: read
       pull-requests: read
       issues: read
-      id-token: write  # Required for OIDC authentication when using GitHub App
+      id-token: write # Required for OIDC authentication when using GitHub App
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
